@@ -1,14 +1,14 @@
 # Sorting and searching algorithms
 
-## Sorting and searching algorithms seen in the _Data Structure_ discipline 2019.1
+## Sorting and searching algorithms seen in the _Data Structure_ discipline 2019.1 at Federal University of Alagoas
 
 * Searching algorithms
-  1. Linear Search
-  2. Binary Search
+  - Linear Search
+  - Binary Search
   
 * Sorting algorithms
-  1. Selection sort
-  2. Bubble sort
-  3. Quick sort
-  4. Insertion sort
-  5. Merge sort
+  - Selection sort
+  - Bubble sort
+  - Quick sort
+  - Insertion sort
+  - Merge sort
