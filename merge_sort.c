@@ -42,7 +42,9 @@ void merge(int vector[], int left, int right, int size)
     }
 
     for (i = left; i < right - left + 1; i++)
+    {
         vector[i] = vector_aux[i];
+    }
 }
 
 void swap(int *a, int *b)
@@ -59,7 +61,9 @@ void mergesort(int vector[], int size, int left, int right)
     if (right - left == 1)
     {
         if (vector[left] > vector[right])
+        {
             swap(&vector[left], &vector[right]);
+        }
     }
     else
     {
@@ -90,6 +94,7 @@ void print_array(int vector[], int size, int i)
 
 int main()
 {
+    // TODO FIX *** stack smashing detected ***
     int size;
 
     printf("Size of the array: \n");
