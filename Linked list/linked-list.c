@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+// TODO: Consertar os ponteiros para void
+
 typedef struct NODE
 {
     void *num;
@@ -104,13 +106,19 @@ void search(NODE *node, int e)
 /** Recebe o nó cabeça da lista, um elemento que vai ser deletado 
  * e um ponteiro para função que realiza a busca */
 NODE *search_delete_integers(NODE *node, void *e, int(*equal)(void *item1, void *item2)) {
-    if((*equal)(node->num, e)) {
-        NODE *temp = node->next;
-        free(node);
-        return temp;
+    if(node->next != NULL){
+        if((*equal)(node->num, e)) {
+            NODE *temp = node->next;
+            free(node);
+            return temp;
+        }
+        else {
+            return node->next = search_delete_integers(node->next, e, equal);
+        }
     }
     else {
-        node->next = search_delete_integers(node->next, e, equal);
+        printf("Sorry, we didn't find element %d in the list\n", *((int*)e));
+        return NULL;
     }
 }
 
@@ -141,9 +149,9 @@ int main()
     for(i = 0; i < size_list - 1; i++){
         scanf("%d", &element);
         // TODO: consertar lixo de memória salvo pelo add_tail
-        // add_tail(head, &element);
+        add_tail(head, &element);
         // TODO: consertar lixo de memória salvo pelo add_head
-        head = add_head(head, &element);
+        // head = add_head(head, &element);
     }    
     printf("\n");
     printing_list_integers(head);
