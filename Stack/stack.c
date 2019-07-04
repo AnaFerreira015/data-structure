@@ -37,6 +37,7 @@ NODE *pop(STACK *stack){
     else {
         aux = stack->top;
         stack->top = stack->top->next;
+        aux->next = NULL;
         return aux;
     }
 }
