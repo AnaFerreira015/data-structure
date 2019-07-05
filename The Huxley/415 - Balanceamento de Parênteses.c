@@ -99,11 +99,21 @@ int main()
             }
             else if (sequency[i] == ')' || sequency[i] == ']')
             {
-                pop(top);
+                if (isEmpty(top))
+                {
+                    // printf("DEBUG 1\n");
+                    // printf("No\n");
+                    push(top, sequency[i]);
+                }
+                else
+                {
+                    pop(top);
+                }
             }
         }
         if (isEmpty(top))
         {
+            // printf("DEBUG 2\n");
             printf("Yes\n");
         }
         else
