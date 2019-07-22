@@ -43,7 +43,7 @@ NODE *pop(STACK *stack)
 
     if (isEmpty(stack))
     {
-        printf("Stack underflow\n");
+        return 0;
     }
     else
     {
@@ -85,70 +85,54 @@ int main()
 
     scanf("%d", &qtd_strings);
 
+    for (j = 0; j < qtd_strings; j++)
+    {
+        STACK *parenteses = creating_stack();
+        STACK *colchetes = creating_stack();
 
-
-    for(j = 0; j < qtd_strings; j++) {
-        STACK *top = creating_stack();
         // scanf("%s\n", sequency);
         getchar();
-        gets(sequency);
+        // gets(sequency);
+        scanf("%[] ()[]\n", sequency);
         // printf("%s\n", sequency);
         size_string = strlen(sequency);
-        if(size_string < 2) {
-            printf("No\n");
-        }
-        else if (sequency[0] == '(' || sequency[0] == '[')
-        {
-            push(top, sequency[0]);
-            for (i = 1; i < size_string; i++)
-            {
-                if (sequency[i] == '(' || sequency[i] == '[')
-                {
-                    push(top, sequency[i]);
-                }
-                else if (sequency[i] == ')' || sequency[i] == ']')
-                {
-                    if(peek(top) == '(' && sequency[i] == ')'){
-                        pop(top);
-                        continue;
-                    }
-                    else if(peek(top) == '[' && sequency[i] == ']'){
-                        pop(top);
-                        continue;
-                    }
-                    else {
-                        // printf("DEBUG 1\n");
-                        printf("No\n");
-                    }
 
-                    // if (isEmpty(top))
-                    // {
-                    //     // printf("DEBUG 1\n");
-                    //     // ([] )
-                    //     // printf("No\n");
-                    //     push(top, sequency[i]);
-                    // }
-                    // else
-                    // {
-                    //     pop(top);
-                    // }
-                }
-            }
-            printing(top->top);
-            if (isEmpty(top))
-            {
-                // printf("DEBUG 2\n");
+        for (i = 0; i < size_string; i++)
+        {
+            if(size_string == 0) {
                 printf("Yes\n");
             }
-            else
+            if (sequency[i] == '(')
             {
-                // printf("DEBUG 2\n");
-                printf("No\n");
-                
-                while(!isEmpty(top)){
-                    pop(top);
+                push(parenteses, sequency[i]);
+            }
+            if (sequency[i] == '[')
+            {
+                // printf("add %c\n", sequency[i]);
+                push(colchetes, sequency[i]);
+            }
+            if (sequency[i] == ')')
+            {
+                if (!(pop(parenteses)))
+                {
+                    push(parenteses, sequency[i]);
+                    break;
                 }
             }
+            if (sequency[i] == ']')
+            {
+                // printf("rm %c\n", sequency[i]);
+                if (!(pop(colchetes)))
+                {
+                    push(colchetes, sequency[i]);
+                    // printf("entrou %c\n", sequency[i]);
+                    break;
+                }
+            }
+        }
+        if (isEmpty(parenteses) && isEmpty(colchetes))
+        {
+            printf("Yes\n");
         }
         else
         {
