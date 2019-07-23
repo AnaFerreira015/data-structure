@@ -67,15 +67,17 @@ void dfs(GRAPH *graph, int source)
 }
 
 // TODO: consertar função (falha de segmentação)
-void printing(GRAPH *graph) {
+void printing(GRAPH *graph)
+{
     int i;
     ADJ_LIST *temp;
-    for(i = 1; i <= MAX_SIZE; i++) {
+    for (i = 1; i <= MAX_SIZE - 1; i++)
+    {
         temp = graph->vertices[i];
-        printf("%2d: (%d) ==>", i, graph->vertices[i]->item);
+        printf("Vertex %2d: ", i);
         while (temp != NULL)
         {
-            printf("%d  ", temp->item);
+            printf("%d  ==> ", temp->item);
             temp = temp->next;
         }
         printf("\n");
