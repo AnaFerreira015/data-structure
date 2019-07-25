@@ -84,22 +84,24 @@ int main()
     int aux = 0;
 
     scanf("%d", &qtd_strings);
-
+    getchar();
     for (j = 0; j < qtd_strings; j++)
     {
         STACK *parenteses = creating_stack();
         STACK *colchetes = creating_stack();
 
         // scanf("%s\n", sequency);
-        getchar();
+
         // gets(sequency);
-        scanf("%[] ()[]\n", sequency);
+        // scanf("%[] ()[]\n", sequency);
         // printf("%s\n", sequency);
+        fgets(sequency, MAX_SIZE, stdin);
         size_string = strlen(sequency);
 
         for (i = 0; i < size_string; i++)
         {
-            if(size_string == 0) {
+            if (size_string == 0)
+            {
                 printf("Yes\n");
             }
             if (sequency[i] == '(')
