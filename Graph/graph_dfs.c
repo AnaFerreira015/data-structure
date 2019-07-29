@@ -66,7 +66,6 @@ void dfs(GRAPH *graph, int source)
     }
 }
 
-// TODO: consertar função (falha de segmentação)
 void printing(GRAPH *graph)
 {
     int i;
