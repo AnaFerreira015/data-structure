@@ -186,9 +186,12 @@ int main()
 
     BINARY_TREE *binary_tree = add(binary_tree_leaf, 7);
     binary_tree = add(binary_tree, 5);
+    binary_tree = add(binary_tree, 9);
 
     printf("Printing pre order: \n");
     print_pre_order(binary_tree);
+    int h = height(binary_tree);
+    printf("height %d\n", h);
     // printf("\nPrinting in order: \n");
     // print_in_order(binary_tree);
     // printf("\nPrinting post order: \n");
