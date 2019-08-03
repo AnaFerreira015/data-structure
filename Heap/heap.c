@@ -8,6 +8,7 @@ typedef struct HEAP {
     int data[MAX_HEAP_SIZE];
 } HEAP;
 
+// TODO: Change to shift bit
 int get_parent_index(int i) {
     return i/2;
 }
@@ -32,7 +33,7 @@ void swap(int *a, int *b)
 }
 
 int isEmpty(HEAP *heap) {
-    return (heap->size == 0);
+    return (!heap->size);
 }
 
 void max_heapify(HEAP *heap, int i) {
@@ -53,7 +54,6 @@ void max_heapify(HEAP *heap, int i) {
     if(heap->data[i] != heap->data[largest]) {
         swap(&heap->data[i], &heap->data[largest]);
         max_heapify(heap, largest);
-        // printf("max_heapify %d\n", heap->data[i]);
     }
 }
 
@@ -102,24 +102,18 @@ void max_heap(HEAP *heap) {
 void printing_heap(HEAP *heap) {
     int i;
     for(i = 1; i <= heap->size; i++){
-        if(heap->data[i]){
-
         printf("heap[%d] = %d\n", i, heap->data[i]);
-        }
     }
 }
 
 void heapsort(HEAP *heap) {
-    int i;
-    for(i = MAX_HEAP_SIZE; i >= 2; i--) {
-        // if(heap->data[i]) {
+    int i, k;
+    for(i = heap->size; i >= 2; i--) {
         swap(&heap->data[1], &heap->data[i]);
+        // printing_heap(heap);
+        // scanf("%d", &k);
         heap->size--;
         max_heapify(heap, 1);
-        // printing_heap(heap);
-
-        // printf("heapsort %d\n", heap->data[i]);
-        // }
     }
 }
 
@@ -135,35 +129,30 @@ HEAP *create_heap() {
     return heap;
 }
 
-
 int main () {
     HEAP *heap = create_heap();
 
     int i, item;
 
-    // printf("Printing before enqueue:\n");
-    // printing_heap(heap);
-
     // printf("\nReceives values:\n");
     for(i = 1; i <= MAX_HEAP_SIZE; i++) {
-        // printf("heap->size: %d\n", heap->size); // debug
         scanf("%d", &item);
         enqueue(heap, item);
         // heap->data[i] = item; // serve para quando não usa a enqueue
         // heap->size++; // serve para quando não usa a enqueue
     }
-    // printf("Heapsort:\n");
-    // heapsort(heap);
     printf("\nPrinting heap: \n");
     printing_heap(heap);
 
-    int d = dequeue(heap);
-    printf("\ndequeued %d\n", d);
-    printf("\nPrinting after dequeue:\n");
+    // int d = dequeue(heap);
+    // printf("\ndequeued %d\n", d);
+    // printf("\nPrinting after dequeue:\n");
+    // printing_heap(heap);
+
+    heapsort(heap);
+    heap->size = MAX_HEAP_SIZE;
+    printf("\nPrinting after heapsort:\n");
     printing_heap(heap);
 
-    // heapsort(heap);
-    // printf("\nPrinting after heapsort:\n");
-    // printing_heap(heap);
     return 0;
 }
