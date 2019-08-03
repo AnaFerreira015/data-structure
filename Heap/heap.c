@@ -8,15 +8,15 @@ typedef struct HEAP {
     int data[MAX_HEAP_SIZE];
 } HEAP;
 
-int get_parent_index(HEAP *heap, int i) {
+int get_parent_index(int i) {
     return i/2;
 }
 
-int get_left_index(HEAP *heap, int i) {
+int get_left_index(int i) {
     return 2*i;
 }
 
-int get_right_index(HEAP *heap, int i) {
+int get_right_index(int i) {
     return 2*i + 1;
 }
 
@@ -37,8 +37,8 @@ int isEmpty(HEAP *heap) {
 
 void max_heapify(HEAP *heap, int i) {
     int largest;
-    int left_index = get_left_index(heap, i);
-    int right_index = get_right_index(heap, i);
+    int left_index = get_left_index(i);
+    int right_index = get_right_index(i);
 
     if(left_index <= heap->size && heap->data[left_index] > heap->data[i]) {
         largest = left_index;
@@ -65,14 +65,14 @@ void enqueue(HEAP *heap, int item) {
         heap->data[++heap->size] = item;
 
         int key_index = heap->size;
-        int parent_index = get_parent_index(heap, heap->size);
+        int parent_index = get_parent_index(heap->size);
 
         while(parent_index >= 1 && heap->data[key_index] > heap->data[parent_index]) {
             swap(&heap->data[key_index], &heap->data[parent_index]);
 
             key_index = parent_index;
 
-            parent_index = get_parent_index(heap, key_index);
+            parent_index = get_parent_index(key_index);
         }
     }
 }
@@ -153,14 +153,14 @@ int main () {
         // heap->size++; // serve para quando não usa a enqueue
     }
     // printf("Heapsort:\n");
-    heapsort(heap);
+    // heapsort(heap);
     printf("\nPrinting heap: \n");
     printing_heap(heap);
 
-    // int d = dequeue(heap);
-    // printf("\ndequeued %d\n", d);
-    // printf("\nPrinting after dequeue:\n");
-    // printing_heap(heap);
+    int d = dequeue(heap);
+    printf("\ndequeued %d\n", d);
+    printf("\nPrinting after dequeue:\n");
+    printing_heap(heap);
 
     // heapsort(heap);
     // printf("\nPrinting after heapsort:\n");
