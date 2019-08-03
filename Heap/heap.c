@@ -8,17 +8,16 @@ typedef struct HEAP {
     int data[MAX_HEAP_SIZE];
 } HEAP;
 
-// TODO: Change to shift bit
 int get_parent_index(int i) {
-    return i/2;
+    return (i >> 1);
 }
 
 int get_left_index(int i) {
-    return 2*i;
+    return (i << 1);
 }
 
 int get_right_index(int i) {
-    return 2*i + 1;
+    return ((i << 1) + 1);
 }
 
 int item_of(HEAP *heap, int i) {
