@@ -166,8 +166,8 @@ int main()
     {
         scanf("%d", &item);
         enqueue(heap, item);
-        // heap->data[i] = item; // serve para quando não usa a enqueue
-        // heap->size++; // serve para quando não usa a enqueue
+        // heap->data[i] = item; // Fits when you don't use the enqueue
+        // heap->size++; // Fits when you don't use the enqueue
     }
     printf("\nPrinting heap: \n");
     printing_heap(heap);
