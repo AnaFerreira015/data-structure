@@ -3,24 +3,29 @@
 
 #define MAX_HEAP_SIZE 10
 
-typedef struct HEAP {
+typedef struct HEAP
+{
     int size;
     int data[MAX_HEAP_SIZE];
 } HEAP;
 
-int get_parent_index(int i) {
+int get_parent_index(int i)
+{
     return (i >> 1);
 }
 
-int get_left_index(int i) {
+int get_left_index(int i)
+{
     return (i << 1);
 }
 
-int get_right_index(int i) {
+int get_right_index(int i)
+{
     return ((i << 1) + 1);
 }
 
-int item_of(HEAP *heap, int i) {
+int item_of(HEAP *heap, int i)
+{
     return heap->data[i];
 }
 
@@ -31,42 +36,53 @@ void swap(int *a, int *b)
     *b = aux;
 }
 
-int isEmpty(HEAP *heap) {
+int isEmpty(HEAP *heap)
+{
     return (!heap->size);
 }
 
-void max_heapify(HEAP *heap, int i) {
+void max_heapify(HEAP *heap, int i)
+{
     int largest;
     int left_index = get_left_index(i);
     int right_index = get_right_index(i);
 
-    if(left_index <= heap->size && heap->data[left_index] > heap->data[i]) {
+    if (left_index <= heap->size && heap->data[left_index] > heap->data[i])
+    {
         largest = left_index;
-    } else {
+    }
+    else
+    {
         largest = i;
     }
 
-    if(right_index <= heap->size && heap->data[right_index] > heap->data[largest]) {
+    if (right_index <= heap->size && heap->data[right_index] > heap->data[largest])
+    {
         largest = right_index;
     }
 
-    if(heap->data[i] != heap->data[largest]) {
+    if (heap->data[i] != heap->data[largest])
+    {
         swap(&heap->data[i], &heap->data[largest]);
         max_heapify(heap, largest);
     }
 }
 
-void enqueue(HEAP *heap, int item) {
-    if(heap->size >= MAX_HEAP_SIZE) {
+void enqueue(HEAP *heap, int item)
+{
+    if (heap->size >= MAX_HEAP_SIZE)
+    {
         printf("Heap overflow\n");
     }
-    else {
+    else
+    {
         heap->data[++heap->size] = item;
 
         int key_index = heap->size;
         int parent_index = get_parent_index(heap->size);
 
-        while(parent_index >= 1 && heap->data[key_index] > heap->data[parent_index]) {
+        while (parent_index >= 1 && heap->data[key_index] > heap->data[parent_index])
+        {
             swap(&heap->data[key_index], &heap->data[parent_index]);
 
             key_index = parent_index;
@@ -76,12 +92,15 @@ void enqueue(HEAP *heap, int item) {
     }
 }
 
-int dequeue(HEAP *heap) {
-    if(isEmpty(heap)) {
+int dequeue(HEAP *heap)
+{
+    if (isEmpty(heap))
+    {
         printf("Heap underflow\n");
         return -1;
     }
-    else {
+    else
+    {
         int item = heap->data[1];
         heap->data[1] = heap->data[heap->size];
         heap->size--;
@@ -91,23 +110,29 @@ int dequeue(HEAP *heap) {
     }
 }
 
-void max_heap(HEAP *heap) {
+void max_heap(HEAP *heap)
+{
     int aux = heap->size, i;
-    for(i = aux/2; i >= 1; i--) {
+    for (i = aux / 2; i >= 1; i--)
+    {
         max_heapify(heap, i);
     }
 }
 
-void printing_heap(HEAP *heap) {
+void printing_heap(HEAP *heap)
+{
     int i;
-    for(i = 1; i <= heap->size; i++){
+    for (i = 1; i <= heap->size; i++)
+    {
         printf("heap[%d] = %d\n", i, heap->data[i]);
     }
 }
 
-void heapsort(HEAP *heap) {
+void heapsort(HEAP *heap)
+{
     int i, k;
-    for(i = heap->size; i >= 2; i--) {
+    for (i = heap->size; i >= 2; i--)
+    {
         swap(&heap->data[1], &heap->data[i]);
         // printing_heap(heap);
         // scanf("%d", &k);
@@ -116,11 +141,13 @@ void heapsort(HEAP *heap) {
     }
 }
 
-HEAP *create_heap() {
-    HEAP *heap = (HEAP*)malloc(sizeof(HEAP));
+HEAP *create_heap()
+{
+    HEAP *heap = (HEAP *)malloc(sizeof(HEAP));
     int i;
 
-    for(i = 1; i <= MAX_HEAP_SIZE; i++) {
+    for (i = 1; i <= MAX_HEAP_SIZE; i++)
+    {
         heap->data[i] = 0;
     }
     heap->size = 0;
@@ -128,13 +155,15 @@ HEAP *create_heap() {
     return heap;
 }
 
-int main () {
+int main()
+{
     HEAP *heap = create_heap();
 
     int i, item;
 
     // printf("\nReceives values:\n");
-    for(i = 1; i <= MAX_HEAP_SIZE; i++) {
+    for (i = 1; i <= MAX_HEAP_SIZE; i++)
+    {
         scanf("%d", &item);
         enqueue(heap, item);
         // heap->data[i] = item; // serve para quando não usa a enqueue
