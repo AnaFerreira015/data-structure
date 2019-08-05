@@ -205,7 +205,7 @@ void add_double_edge(GRAPH *graph, int vertex1, int vertex2)
 int main()
 {
     GRAPH *undirected_graph = create_graph();
-    add_edge(undirected_graph, 1, 2);
+    // add_edge(undirected_graph, 1, 2);
     add_double_edge(undirected_graph, 1, 2);
     add_double_edge(undirected_graph, 1, 5);
     add_double_edge(undirected_graph, 2, 5);
