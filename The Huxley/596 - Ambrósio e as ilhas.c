@@ -48,7 +48,7 @@ GRAPH *create_graph()
     {
         graph->vertices[i] = NULL;
         graph->visited[i] = 0;
-        graph->dist[i] = 0;
+        graph->dist[i] = -1;
     }
 
     return graph;
@@ -182,6 +182,7 @@ int bfs(GRAPH *graph, int source, int destiny)
     int dequeued;
     NODE *node = graph->vertices[source]->front;
     graph->visited[source] = 1;
+    graph->dist[source] = 0;
     enqueue(queue, source);
 
     while (!isEmpty(queue))
@@ -222,16 +223,7 @@ int main()
             scanf("%d%d", &u, &v);
             add_double_edge(undirected_graph, u, v);
         }
-        int qtd_min = bfs(undirected_graph, 1, num_ilhas);
-        if (qtd_min >= 1)
-        {
-
-            printf("%d\n", qtd_min);
-        }
-        else
-        {
-            printf("-1\n");
-        }
+        printf("%d\n", bfs(undirected_graph, 1, num_ilhas));
     }
     return 0;
 }
