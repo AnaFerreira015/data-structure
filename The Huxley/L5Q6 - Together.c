@@ -241,7 +241,7 @@ int main()
 
         for(j = 0; j < strlen(nome); j++) {
             // printf("nome[%d] = %c\n", j, nome[j]);
-            nomes[i][j] = nome[i];
+            nomes[i][j] = nome[j];
         
         }
         nomes[i][j] = '\0';
