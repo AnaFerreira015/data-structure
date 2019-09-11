@@ -11,7 +11,8 @@ typedef struct NODE
     struct NODE *next;
 } NODE;
 
-typedef struct NODE_CHAR {
+typedef struct NODE_CHAR
+{
     char letra;
     struct NODE_CHAR *next;
 } NODE_CHAR;
@@ -222,64 +223,87 @@ NODE_CHAR *creating_node_char(char letra)
     return node;
 }
 
-int main()
+int return_index(char name[], int lines, char names[][100])
 {
-    int n, m, i, j, v1, v2, a, b;
-    scanf("%d%d", &n, &m);
-
-    // NODE_CHAR *hash[n];
-    // for(i = 0; i < n; i++) {
-    //     hash[i] = NULL;
-    // }
-
-    GRAPH *undirected_graph = create_graph();
-
-    char nome[8], nomes[n][8];
-
-    for(i = 0; i < n; i++) {
-        scanf("%s", nome);
-
-        for(j = 0; j < strlen(nome); j++) {
-            // printf("nome[%d] = %c\n", j, nome[j]);
-            nomes[i][j] = nome[j];
-        
+    int i, j, index, amount = 0;
+    for (i = 0; i < lines; i++)
+    {
+        for (j = 0; names[i][j] != '\0'; j++)
+        {
+            if (names[i][j] == name[j])
+            {
+                amount++;
+            }
         }
-        nomes[i][j] = '\0';
-        // printf("i %d j %kd\n", i, j);
-        // printf("aqui %c\n",nomes[i][j-1]);
+        if (amount == strlen(name))
+        {
+            index = i;
+        }
+        amount = 0;
     }
+    return index;
+}
 
-    for(i = 0; i < n; i++) {
-        for(j = 0; nomes[i][j] != '\0'; j++) {
-            // printf("nome[%d] = %c\n", j, nome[j]);
-            printf("matriz[%d][%d] = %c\n", i, j, nomes[i][j]);
+void add_matrix(int n, char names[][100])
+{
+    char name[100];
+    int i, j;
+    for (i = 0; i < n; i++)
+    {
+        scanf("%s", name);
+        for (j = 0; j < strlen(name); j++)
+        {
+            names[i][j] = name[j];
+        }
+        names[i][j] = '\0';
+    }
+}
+
+void printing_matrix(int n, char names[][100])
+{
+    int i, j;
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; names[i][j] != '\0'; j++)
+        {
+            printf("matriz[%d][%d] = %c\n", i, j, names[i][j]);
         }
     }
+}
 
-
-    // for(i = 0; i < n; i++) {
-    //     NODE_CHAR *node = NULL;
-    //     printf("nome aqui\n");
-    //     scanf("%s", nome);
-    //     for(j = 0; j < strlen(nome); j++) {
-    //         node->letra = nome[j];
-    //         printf("oi\n");
-    //         node->next = NULL;
-    //         hash[i] = node;
-    //     }
-    // }
-
-    printf("opa\n");
-
+void read_edge(int m, GRAPH *undirected_graph)
+{
+    int i, v1, v2;
     for (i = 0; i < m; i++)
     {
         scanf("%d%d", &v1, &v2);
         add_edge(undirected_graph, v1, v2);
     }
+}
 
+int main()
+{
+    int n, m;
+    scanf("%d%d", &n, &m);
+
+    GRAPH *undirected_graph = create_graph();
+
+    char names[n][100];
+
+    add_matrix(n, names);
+    // printing_matrix(n, names);
+
+    read_edge(m, undirected_graph);
     // printing(undirected_graph);
 
-    scanf("%d%d", &a, &b);
+    int a, b;
+    char name[100];
+    scanf("%s", name);
+
+    a = return_index(name, n, names);
+
+    scanf("%s", name);
+    b = return_index(name, n, names);
 
     int path_valid = bfs(undirected_graph, a, b);
 
