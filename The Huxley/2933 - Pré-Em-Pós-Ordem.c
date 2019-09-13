@@ -46,7 +46,8 @@ void print_in_order(BINARY_TREE *bt, int height)
     {
         print_in_order(bt->left, height + 1);
         int i;
-        for (i = 0; i < height; i++) printf("\t");
+        for (i = 0; i < height; i++)
+            printf("\t");
         printf("%4d\n", bt->item);
         print_in_order(bt->right, height + 1);
     }
@@ -57,7 +58,8 @@ void print_pre_order(BINARY_TREE *bt, int height)
     if (!isEmpty(bt))
     {
         int i;
-        for (i = 0; i < height; i++) printf("\t");
+        for (i = 0; i < height; i++)
+            printf("\t");
         printf("%4d\n", bt->item);
         print_pre_order(bt->left, height + 1);
         print_pre_order(bt->right, height + 1);
@@ -71,20 +73,28 @@ void print_post_order(BINARY_TREE *bt, int height)
         print_post_order(bt->left, height + 1);
         print_post_order(bt->right, height + 1);
         int i;
-        for (i = 0; i < height; i++) printf("\t");
+        for (i = 0; i < height; i++)
+            printf("\t");
         printf("%4d\n", bt->item);
     }
 }
 
-void construct(BINARY_TREE *bt, int u, int left, int right) {
-    if(bt == NULL) {
+void construct(BINARY_TREE *bt, int u, int left, int right)
+{
+    if (bt == NULL)
+    {
         return;
-    } else {
-        if(bt->item == u) {
-            if(left != -1) {
+    }
+    else
+    {
+        if (bt->item == u)
+        {
+            if (left != -1)
+            {
                 bt->left = create_node_binary_tree(left);
             }
-            if (right != -1) {
+            if (right != -1)
+            {
                 bt->right = create_node_binary_tree(right);
             }
         }
@@ -95,28 +105,25 @@ void construct(BINARY_TREE *bt, int u, int left, int right) {
 
 int main()
 {
-    // BINARY_TREE *bt = create_binary_tree(6, create_binary_tree(4, NULL, NULL), create_binary_tree(9, create_binary_tree(1, NULL, NULL), create_binary_tree(2, NULL, NULL)));
-    // print_in_order(bt);
-    // print_post_order(bt);
-    // print_pre_order(bt);
     int n, p, i, u, left, right;
 
     BINARY_TREE *bt = create_empty_binary_tree();
-    
-    scanf("%d%d", &n, &p);
-    for(i = 0; i < p; i++) {
-        scanf("%d%d%d", &u, &left, &right);
+
+    scanf("%d %d", &n, &p);
+    for (i = 0; i < p; i++)
+    {
+        scanf("%d %d %d", &u, &left, &right);
         construct(bt, u, left, right);
     }
-    
+
     printf("vazia %d\n", bt == NULL);
 
     printf("Preorder print:\n");
     print_pre_order(bt, 0);
-    
+
     printf("Inorder print:\n");
     print_in_order(bt, 0);
-    
+
     printf("Postorder print:\n");
     print_post_order(bt, 0);
     return 0;

@@ -281,6 +281,18 @@ void read_edge(int m, GRAPH *undirected_graph)
     }
 }
 
+void initialize_matrix(int n, char matrix[][100])
+{
+    int i, j;
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < 100; j++)
+        {
+            matrix[i][j] = '\0';
+        }
+    }
+}
+
 int main()
 {
     int n, m;
@@ -290,6 +302,7 @@ int main()
 
     char names[n][100];
 
+    initialize_matrix(n, names);
     add_matrix(n, names);
     // printing_matrix(n, names);
 
