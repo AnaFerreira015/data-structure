@@ -107,24 +107,13 @@ int main()
 {
     int n, p, i, u, left, right;
 
-// BINARY_TREE *create_binary_tree(int item, BINARY_TREE *left, BINARY_TREE *right)
-// {
-//     BINARY_TREE *new_binary_tree = (BINARY_TREE *)malloc(sizeof(BINARY_TREE));
-
-//     new_binary_tree->item = item;
-//     new_binary_tree->left = left;
-//     new_binary_tree->right = right;
-
-//     return new_binary_tree;
-// }
-
     BINARY_TREE *root = create_empty_binary_tree();
     BINARY_TREE *l = create_empty_binary_tree();
     BINARY_TREE *r = create_empty_binary_tree();
 
     scanf("%d %d", &n, &p);
     scanf("%d %d %d", &u, &left, &right);
-    // root = create_node_binary_tree(u);
+
     l = create_node_binary_tree(left);
     r = create_node_binary_tree(right);
     root = create_binary_tree(u, l, r);
@@ -134,8 +123,6 @@ int main()
         scanf("%d %d %d", &u, &left, &right);
         construct(root, u, left, right);
     }
-
-    printf("vazia %d\n", root == NULL);
 
     printf("Preorder print:\n");
     print_pre_order(root, 0);

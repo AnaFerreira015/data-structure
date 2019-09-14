@@ -98,21 +98,104 @@ void generate_parenthesis_btree(BINARY_TREE *bt) {
     printf(")");
 }
 
+void print_pre_order(BINARY_TREE *bt)
+{
+    if (!is_empty(bt))
+    {
+        printf("%d ", bt->item);
+        print_pre_order(bt->left);
+        print_pre_order(bt->right);
+    }
+}
+
+int is_leaf(BINARY_TREE *bt) {
+    return ((bt->left == NULL) && (bt->right == NULL));
+}
+
+// void count_sum(BINARY_TREE *bt, int sum) {
+//     int amount = 0;
+//     if(!is_empty(bt)) {
+//         if(!is_leaf(bt)) {
+//             amount += bt->item;
+//             count_sum(bt->left, sum);
+//             count_sum(bt->right, sum);
+//         }
+//         else {
+//             if(amount == sum) {
+//                 printf("sim\n");
+//             } else {
+//                 printf("nao\n");
+//             }
+//             amount -= bt->item;
+//         }
+//     }
+// }
+
+void count_sum(BINARY_TREE *bt, int amount, int sum)
+{
+    if (!is_empty(bt))
+    {
+        if(is_leaf(bt)) {
+            if(amount + bt->item == sum) {
+                // printf("sim soma: %d amount: %d\n", sum, amount);
+                printf("sim\n");
+                return;
+            }
+            else{
+                printf("nao\n");
+                // printf("nao soma: %d amount: %d\n", sum, amount);
+            }
+        }
+        // printf("bt->item %d\n", bt->item);
+        count_sum(bt->left, amount + bt->item, sum);
+        count_sum(bt->right, amount + bt->item, sum);
+    } 
+    // else{
+    //     printf("nao\n");
+    // }
+}
+
 int main () {
     char *arvore;
-    arvore = read_parenthesis_btree();
-    // gets(arvore);
-    // printf("%s\n", arvore);
-    int size = strlen(arvore);
-    printf("strlen da arvore %d\n", size);
-
+    int size, i, aux = 0, sum;
     BINARY_TREE *bt = NULL;
-    int i;
-    // for(i = 0; i < size; i++) {
-        bt = construct_btree(arvore, 0);
+
+    // while(scanf("%d", &sum) != -1000) {
+    //     arvore = read_parenthesis_btree();
+        
+    //     printf("%s\n", arvore);
+        
+    //     size = strlen(arvore);
+
+    //     bt = construct_btree(arvore, &aux);
+
+    //     count_sum(bt, sum);
+        
+    //     printf("pre_order\n");
+    //     print_pre_order(bt);
+    //     printf("\n");
     // }
 
-    // BINARY_TREE *bt = construct_btree(arvore, 0);
+    scanf("%d", &sum);
+    // printf("sum: %d\n", sum);
+    // printf("sum %d\n", sum);
 
+    while(sum != -1000){
+        arvore = read_parenthesis_btree();
+        // printf("%s\n", arvore);
+        
+        size = strlen(arvore);
+
+        bt = construct_btree(arvore, &aux);
+
+        count_sum(bt, 0, sum);
+        
+        // printf("pre_order\n");
+        // print_pre_order(bt);
+        // printf("\n");  
+
+        scanf("%d", &sum);
+        // printf("sum: %d\n", sum);
+    }
     return 0;
 }
